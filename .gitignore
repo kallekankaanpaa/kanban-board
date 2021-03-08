@@ -1,6 +1,7 @@
 # Ignore IDE files
 **/.idea
 **/.vscode
+**/.metals
 
 # Ignore build targets 
 **/target
