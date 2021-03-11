@@ -22,6 +22,21 @@ class CardTest extends AnyFlatSpec {
     assert(card.estimate === "6 Weeks 5 Days 1 Hour 17 Minutes")
   }
 
+  it should "throw FormatException when time format is invalid" in {
+    val card = Card()
+    assertThrows[FormatException] {
+      card.setTimeEstimate("5h10m")
+    }
+
+    assertThrows[FormatException] {
+      card.setTimeEstimate("5h 10mm")
+    }
+
+    assertThrows[FormatException] {
+      card.setTimeEstimate("5h 10 ")
+    }
+  }
+
   "Card with header" should "have header" in {
     val card = Card("Card's header")
     assert(card.header.isDefined)

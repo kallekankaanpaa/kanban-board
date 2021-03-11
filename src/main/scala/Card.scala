@@ -2,6 +2,7 @@ import scala.reflect.macros.Attachments
 import scala.util.control
 import scala.collection.mutable.Buffer
 
+/** Factory for [[Card]] instances */
 object Card {
 
   /** Creates an empty card */
@@ -15,6 +16,7 @@ object Card {
   }
 }
 
+/** A Card that contains details of a task */
 class Card {
 
   /** Card with no header is considered empty */
@@ -98,6 +100,7 @@ class Card {
     * @param time String in the format specified above
     * @return Time given in seconds
     */
+  @throws[FormatException]
   private def parseTime(time: String): Long = {
     var seconds = 0
 
@@ -106,7 +109,7 @@ class Card {
       val amount = block.dropRight(1).toIntOption
       amount match {
         case Some(amount) if amount >= 0 => (amount, identifier)
-        case _                           => throw new Exception("Invalid time amount")
+        case _                           => throw new FormatException(time, "Invalid time amount")
       }
     }
 
@@ -116,7 +119,7 @@ class Card {
         case 'd' => day
         case 'h' => hour
         case 'm' => minute
-        case _   => throw new Exception("Invalid identifier for time")
+        case _   => throw new FormatException(time, "Invalid identifier for time")
       })
     }
     seconds
@@ -170,3 +173,11 @@ class Card {
     case None         => "Empty card"
   }
 }
+
+/** Exception for handling malformed time strings
+  *
+  * @constructor Creates a new FormatException with original string and message
+  * @param original The original string in invalid format
+  * @param message Message about the failure
+  */
+class FormatException(original: String, message: String) extends Exception(original)
