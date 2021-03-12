@@ -11,7 +11,7 @@ object Card {
   /** Create a card with header */
   def apply(header: String): Card = {
     val card = new Card
-    card.header = Some(header)
+    card.header = header
     card
   }
 }
@@ -21,9 +21,9 @@ object Card {
 class Card extends Serializable {
 
   /** Card with no header is considered empty */
-  var header: Option[String] = None
-  var description: Option[String] = None
-  var assignee: Option[String] = None
+  private var _header: Option[String] = None
+  private var _description: Option[String] = None
+  private var _assignee: Option[String] = None
 
   /** Time used in seconds */
   private var timeUsed: Option[Long] = None
@@ -179,12 +179,21 @@ class Card extends Serializable {
   }
 
   /** Card with empty header is considered empty */
-  def isEmpty = header.isEmpty
+  def isEmpty = _header.isEmpty
 
-  override def toString(): String = header match {
-    case Some(header) => header
-    case None         => "Empty card"
-  }
+  def header: String = _header.getOrElse("Empty card")
+
+  def header_=(header: String): Unit = this._header = Some(header)
+
+  def description: String = _description.getOrElse("No description")
+
+  def description_=(description: String) = this._description = Some(description)
+
+  def assignee: String = _assignee.getOrElse("This card hasn't been assigned yet.")
+
+  def assignee_=(assignee: String) = this._assignee = Some(assignee)
+
+  override def toString(): String = s"${this.header}\n\n${this.description}"
 }
 
 /** Exception for handling malformed time strings

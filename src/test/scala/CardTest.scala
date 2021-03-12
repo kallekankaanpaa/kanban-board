@@ -53,6 +53,6 @@ class CardTest extends AnyFlatSpec {
 
   "Card with header" should "have header" in {
     val card = Card("Card's header")
-    assert(card.header.isDefined)
+    assert(card.header === "Card's header")
   }
 }
