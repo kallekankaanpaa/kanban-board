@@ -30,14 +30,20 @@ class Card extends Serializable {
 
   /** Estimated time for the completion of the task in seconds */
   private var timeEstimate: Option[Long] = None
-  var attachments: Set[AnyVal] = Set()
-  var tags: Set[Tag] = Set()
+  private var attachments: Set[AnyVal] = Set()
+  private var tagSet: Set[Tag] = Set()
 
   // Values for time conversations
   private val week = 604800
   private val day = 86400
   private val hour = 3600
   private val minute = 60
+
+  def addTag(tag: Tag): Unit = tagSet = tagSet + tag
+
+  def removeTag(tag: Tag): Unit = tagSet = tagSet - tag
+
+  def tags: Set[Tag] = tagSet
 
   /** Set time estimation for the card
     *

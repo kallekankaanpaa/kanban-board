@@ -37,6 +37,20 @@ class CardTest extends AnyFlatSpec {
     }
   }
 
+  "Card with tags" should "return correct tags" in {
+    val card = Card()
+    card.addTag(Tag("Test", "Desc"))
+    assert(card.tags.contains(Tag("Test", "Desc")))
+  }
+
+  "Removing tag" should "remove the tag" in {
+    val card = Card()
+    card.addTag(Tag("Test", "Desc"))
+    assume(card.tags.contains(Tag("Test", "Desc")))
+    card.removeTag(Tag("Test", "Desc"))
+    assert(!card.tags.contains(Tag("Test", "Desc")))
+  }
+
   "Card with header" should "have header" in {
     val card = Card("Card's header")
     assert(card.header.isDefined)
