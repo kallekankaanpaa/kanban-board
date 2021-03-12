@@ -9,45 +9,45 @@ class CardTest extends AnyFlatSpec {
 
   it should "have an empty estimate" in {
     val card = Card()
-    assert(card.estimate === "No estimate set")
+    assert(card.timeEstimate === "No estimate set")
   }
 
   it should "have a correct estimate after setting an estimate" in {
     val card = Card()
-    card.setTimeEstimate("5h 10m")
-    assert(card.estimate === "5 Hours 10 Minutes")
-    card.setTimeEstimate("5w 10d 1h 7m")
-    assert(card.estimate === "6 Weeks 3 Days 1 Hour 7 Minutes")
-    card.addToEstimate("2d 10m")
-    assert(card.estimate === "6 Weeks 5 Days 1 Hour 17 Minutes")
+    card.timeEstimate = "5h 10m"
+    assert(card.timeEstimate === "5 Hours 10 Minutes")
+    card.timeEstimate = "5w 10d 1h 7m"
+    assert(card.timeEstimate === "6 Weeks 3 Days 1 Hour 7 Minutes")
+    card.timeEstimate + "2d 10m"
+    assert(card.timeEstimate === "6 Weeks 5 Days 1 Hour 17 Minutes")
   }
 
   it should "throw FormatException when time format is invalid" in {
     val card = Card()
     assertThrows[FormatException] {
-      card.setTimeEstimate("5h10m")
+      card.timeEstimate = "5h10m"
     }
 
     assertThrows[FormatException] {
-      card.setTimeEstimate("5h 10mm")
+      card.timeEstimate = "5h 10mm"
     }
 
     assertThrows[FormatException] {
-      card.setTimeEstimate("5h 10 ")
+      card.timeEstimate = "5h 10 "
     }
   }
 
   "Card with tags" should "return correct tags" in {
     val card = Card()
-    card.addTag(Tag("Test", "Desc"))
+    card.tags + Tag("Test", "Desc")
     assert(card.tags.contains(Tag("Test", "Desc")))
   }
 
   "Removing tag" should "remove the tag" in {
     val card = Card()
-    card.addTag(Tag("Test", "Desc"))
+    card.tags + Tag("Test", "Desc")
     assume(card.tags.contains(Tag("Test", "Desc")))
-    card.removeTag(Tag("Test", "Desc"))
+    card.tags - Tag("Test", "Desc")
     assert(!card.tags.contains(Tag("Test", "Desc")))
   }
 

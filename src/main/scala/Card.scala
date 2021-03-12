@@ -26,30 +26,30 @@ class Card extends Serializable {
   private var _assignee: Option[String] = None
 
   /** Time used in seconds */
-  private var timeUsed: Option[Long] = None
+  private var _timeUsed: Option[Long] = None
 
   /** Estimated time for the completion of the task in seconds */
-  private var timeEstimate: Option[Long] = None
-  private var attachments: Set[AnyVal] = Set()
-  private var tagSet: Set[Tag] = Set()
+  private var _timeEstimate: Option[Long] = None
+  private var _attachments: Set[AnyVal] = Set()
+  private var _tags: Set[Tag] = Set()
 
   // Values for time conversations
-  private val week = 604800
-  private val day = 86400
-  private val hour = 3600
-  private val minute = 60
+  private val Week = 604800
+  private val Day = 86400
+  private val Hour = 3600
+  private val Minute = 60
 
   /** Adds provided tag to card if it doesn't exist yet */
-  def addTag(tag: Tag): Unit = tagSet = tagSet + tag
+  def tags_+(tag: Tag): Unit = _tags = _tags + tag
 
   /** Removes tag from card if it exists */
-  def removeTag(tag: Tag): Unit = tagSet = tagSet - tag
+  def tags_-(tag: Tag): Unit = _tags = _tags - tag
 
   /** Returns all tags of the card */
-  def tags: Set[Tag] = tagSet
+  def tags: Set[Tag] = _tags
 
   /** Returns boolean indicating whether card has been tagged with the provided tag */
-  def hasTag(tag: Tag): Boolean = tagSet.contains(tag)
+  def hasTag(tag: Tag): Boolean = _tags.contains(tag)
 
   /** Set time estimation for the card
     *
@@ -64,7 +64,7 @@ class Card extends Serializable {
     *
     * @param estimate The time estimation in format specified above
     */
-  def setTimeEstimate(estimate: String): Unit = this.timeEstimate = Some(parseTime(estimate))
+  def timeEstimate_=(estimate: String): Unit = this._timeEstimate = Some(parseTime(estimate))
 
   /** Add to time estimation of the card
     *
@@ -79,7 +79,7 @@ class Card extends Serializable {
     *
     * @param estimate The time to add in format specified above
     */
-  def addToEstimate(estimate: String): Unit = this.timeEstimate = this.timeEstimate match {
+  def timeEstimate_+(estimate: String): Unit = this._timeEstimate = this._timeEstimate match {
     case Some(time) => Some(time + parseTime(estimate))
     case None       => Some(parseTime(estimate))
   }
@@ -97,7 +97,7 @@ class Card extends Serializable {
     *
     * @param time The time to add in format specified above
     */
-  def addUsedTime(usedTime: String): Unit = this.timeUsed = this.timeUsed match {
+  def timeUsed_+(usedTime: String): Unit = this._timeUsed = this._timeUsed match {
     case Some(time) => Some(time + parseTime(usedTime))
     case None       => Some(parseTime(usedTime))
   }
@@ -128,10 +128,10 @@ class Card extends Serializable {
 
     for ((amount, identifier) <- time.split(' ').map(blockToData)) {
       seconds += amount * (identifier match {
-        case 'w' => week
-        case 'd' => day
-        case 'h' => hour
-        case 'm' => minute
+        case 'w' => Week
+        case 'd' => Day
+        case 'h' => Hour
+        case 'm' => Minute
         case _   => throw new FormatException(time, "Invalid identifier for time")
       })
     }
@@ -140,21 +140,15 @@ class Card extends Serializable {
 
   /** @return String representation of the time estimate
     */
-  def estimate: String = this.timeEstimate match {
-    case Some(estimate) => formatTime(estimate)
-    case None           => "No estimate set"
-  }
+  def timeEstimate: String = this._timeEstimate.map(formatTime).getOrElse("No estimate set")
 
   /** @return String representation of the used time
     */
-  def usedTime: String = this.timeUsed match {
-    case Some(used) => formatTime(used)
-    case None       => "No time used"
-  }
+  def timeUsed: String = this._timeUsed.map(formatTime).getOrElse("No time used")
 
   /** @return String representation of the time remaining from the estimation
     */
-  def timeRemaining: String = (this.timeEstimate, this.timeUsed) match {
+  def timeRemaining: String = (this._timeEstimate, this._timeUsed) match {
     case (Some(estimate), Some(used)) => formatTime(estimate - used)
     case (Some(_), None)              => "No estimation"
     case (None, Some(_))              => "No time used"
@@ -167,10 +161,10 @@ class Card extends Serializable {
     */
   private def formatTime(seconds: Long): String = {
     var blocks = Buffer[(Long, String)]()
-    blocks += seconds / week -> "Week"
-    blocks += seconds % week / day -> "Day"
-    blocks += seconds % week % day / hour -> "Hour"
-    blocks += seconds % week % day % hour / minute -> "Minute"
+    blocks += seconds / Week -> "Week"
+    blocks += seconds % Week / Day -> "Day"
+    blocks += seconds % Week % Day / Hour -> "Hour"
+    blocks += seconds % Week % Day % Hour / Minute -> "Minute"
 
     blocks
       .filter(_._1 != 0)
