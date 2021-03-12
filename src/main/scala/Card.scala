@@ -39,11 +39,17 @@ class Card extends Serializable {
   private val hour = 3600
   private val minute = 60
 
+  /** Adds provided tag to card if it doesn't exist yet */
   def addTag(tag: Tag): Unit = tagSet = tagSet + tag
 
+  /** Removes tag from card if it exists */
   def removeTag(tag: Tag): Unit = tagSet = tagSet - tag
 
+  /** Returns all tags of the card */
   def tags: Set[Tag] = tagSet
+
+  /** Returns boolean indicating whether card has been tagged with the provided tag */
+  def hasTag(tag: Tag): Boolean = tagSet.contains(tag)
 
   /** Set time estimation for the card
     *
