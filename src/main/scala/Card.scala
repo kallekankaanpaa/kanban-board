@@ -17,7 +17,8 @@ object Card {
 }
 
 /** A Card that contains details of a task */
-class Card {
+@SerialVersionUID(1L)
+class Card extends Serializable {
 
   /** Card with no header is considered empty */
   var header: Option[String] = None
