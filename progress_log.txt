@@ -1,0 +1,18 @@
+I've been playing around with ways of making components and decided to use fxml
+to define my UI. I've also created the basic card data class (it still lacks some features).
+
+Card class has working implementations for:
+    - Time tracking
+    - Tags
+    - Header
+    - Description
+    - Assignee
+
+I've also added basic Tag, and Time classes which are used in cards.
+I've created very lacking Attachment class as a placeholder for proper implementation
+
+I've added basic tests for the time tracking and tag handling mehtods of Card
+
+I haven't tracked the time I've been using too well but I would approximate that I've used
+25-30 hours on this project so far. And I feel like I have figured out most of the basic stuff.
+
