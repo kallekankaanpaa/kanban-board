@@ -16,3 +16,5 @@ I've added basic tests for the time tracking and tag handling mehtods of Card
 I haven't tracked the time I've been using too well but I would approximate that I've used
 25-30 hours on this project so far. And I feel like I have figured out most of the basic stuff.
 
+Last few week have been really busy with other school work so I've only managed to test out some functionalities and plann ahead.
+That's why I haven't pushed any code to the repo.
