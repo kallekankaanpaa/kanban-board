@@ -1,8 +1,12 @@
 package data
 
-import scala.reflect.macros.Attachments
 import scala.util.control
 import scala.collection.mutable.Buffer
+import scalafx.scene.Parent
+import scalafxml.core.DependenciesByType
+import scala.reflect.runtime.universe.typeOf
+
+import ui.{Component, Utils}
 
 /** Factory for [[Card]] instances */
 object Card {
@@ -40,7 +44,9 @@ object Card {
 
 /** A Card that contains details of a task */
 @SerialVersionUID(1L)
-class Card extends Serializable {
+class Card extends Serializable with Component {
+
+  val fxmlPath: String = "/fxml/Card.fxml"
 
   /** Card with no header is considered empty */
   private var _header: Option[String] = None
@@ -120,6 +126,8 @@ class Card extends Serializable {
 
   /** Card with empty header is considered empty */
   def isEmpty = _header.isEmpty
+
+  def toUIComponent: Parent = Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
 
   override def toString(): String = s"${this.header}\n\n${this.description}"
 
