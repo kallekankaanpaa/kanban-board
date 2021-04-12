@@ -11,26 +11,20 @@ import scalafx.scene.Parent
 import scalafxml.core.DependenciesByType
 import scala.reflect.runtime.universe.typeOf
 
-import data.Card
+import ui.Utils
+import data.{Card, Column, Board}
 
 object KanbanBoard extends JFXApp {
 
-  val root = readFXML("fxml/KanbanBoard.fxml")
+  val testCard = Card("With header")
+  val testColumn = new Column("testi column", Set(testCard, Card("Another one")))
+  val anotherColumn = new Column("toka", Set(Card("Asdf")))
+  val board = new Board("testi board", Set(testColumn, anotherColumn))
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Kanban board"
     width = 650
     height = 400
-    scene = new Scene(card(Card("With Header")))
+    scene = new Scene(board.toUIComponent)
   }
-
-  private def readFXML(path: String, controller: ControllerDependencyResolver): Parent = {
-    val component = getClass.getResource(path)
-    if (component == null) throw new IOException(s"""Could not read "${path}"""")
-    else FXMLView(component, controller)
-  }
-
-  private def readFXML(path: String): Parent = readFXML(path, NoDependencyResolver)
-
-  private def card(card: Card): Parent = readFXML("fxml/Card.fxml", new DependenciesByType(Map(typeOf[Card] -> card)))
 }
