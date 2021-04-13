@@ -1,15 +1,5 @@
 import scalafx.application.JFXApp
-import scalafx.Includes._
 import scalafx.scene.Scene
-import scalafx.scene.layout._
-import scalafx.scene.control._
-import scalafx.scene.shape.Rectangle
-import scalafx.scene.shape.Circle
-import scalafxml.core.{NoDependencyResolver, FXMLView, FXMLLoader, ControllerDependencyResolver}
-import java.io.IOException
-import scalafx.scene.Parent
-import scalafxml.core.DependenciesByType
-import scala.reflect.runtime.universe.typeOf
 
 import ui.Utils
 import data.{Card, Column, Board}

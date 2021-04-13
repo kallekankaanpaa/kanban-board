@@ -8,20 +8,20 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BoardController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar stylesheets="@../styles/Board.css" styleClass="menu-bar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" styleClass="menu" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#saveBoard" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadBoard" text="Load" />
+              <MenuItem mnemonicParsing="false" onAction="#saveBoard" styleClass="menu-item" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadBoard" styleClass="menu-item" text="Load" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Settings">
+          <Menu mnemonicParsing="false" styleClass="menu" text="Settings">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" styleClass="menu" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
