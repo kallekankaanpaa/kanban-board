@@ -1,11 +1,10 @@
 package controllers
 
-import scalafxml.core.macros.sfxml
-import scalafx.event.ActionEvent
 import scalafx.event.Event
-import scalafx.scene.control._
+import scalafx.scene.control.Label
+import scalafxml.core.macros.sfxml
+
 import data.Card
-import javafx.fxml.FXML
 
 @sfxml
 class CardController(private val header: Label, private val description: Label, private val card: Card) {

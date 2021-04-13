@@ -1,9 +1,11 @@
 package ui
 
-import scalafxml.core.{ControllerDependencyResolver, FXMLView, NoDependencyResolver}
-import scalafx.Includes._
 import java.io.{IOException, ObjectOutputStream, ObjectInputStream, FileOutputStream, FileInputStream}
+
+import scalafx.Includes._
 import scalafx.scene.Parent
+import scalafxml.core.{ControllerDependencyResolver, FXMLView, NoDependencyResolver}
+
 import data.Board
 
 object Utils {

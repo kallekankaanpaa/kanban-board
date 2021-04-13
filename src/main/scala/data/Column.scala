@@ -1,9 +1,11 @@
 package data
 
-import ui.{Component, Utils}
-import scalafx.scene.Parent
 import scala.reflect.runtime.universe.typeOf
+
+import scalafx.scene.Parent
 import scalafxml.core.DependenciesByType
+
+import ui.{Component, Utils}
 
 @SerialVersionUID(1L)
 class Column(val name: String, val cards: Set[Card]) extends Serializable with Component {

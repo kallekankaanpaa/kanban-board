@@ -1,7 +1,8 @@
 package controllers
 
-import scalafxml.core.macros.sfxml
 import scalafx.scene.layout.VBox
+import scalafxml.core.macros.sfxml
+
 import data.Card
 
 @sfxml

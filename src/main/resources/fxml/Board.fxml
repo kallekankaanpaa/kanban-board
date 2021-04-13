@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BoardController">
    <top>
-      <MenuBar stylesheets="@../styles/Board.css" styleClass="menu-bar" BorderPane.alignment="CENTER">
+      <MenuBar styleClass="menu-bar" stylesheets="@../styles/Board.css" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" styleClass="menu" text="File">
             <items>
@@ -30,6 +30,6 @@
       </MenuBar>
    </top>
    <center>
-      <HBox fx:id="columns" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox fx:id="columns" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

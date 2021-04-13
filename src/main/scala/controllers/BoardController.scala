@@ -1,15 +1,16 @@
 package controllers
 
-import scalafxml.core.macros.sfxml
+import java.io.File
+
 import scalafx.scene.layout.HBox
-import scalafx.stage.FileChooser
+import scalafx.stage.{FileChooser, Window}
 import scalafx.stage.FileChooser.ExtensionFilter
+import scalafx.stage.Window
+import scalafx.scene.Scene
+import scalafxml.core.macros.sfxml
 
 import ui.Utils
 import data.Board
-import scalafx.scene.Scene
-import scalafx.stage.Window
-import java.io.File
 
 @sfxml
 class BoardController(private val columns: HBox, private var board: Board) {

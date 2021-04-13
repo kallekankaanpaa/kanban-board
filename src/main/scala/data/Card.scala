@@ -1,10 +1,9 @@
 package data
 
-import scala.util.control
-import scala.collection.mutable.Buffer
+import scala.reflect.runtime.universe.typeOf
+
 import scalafx.scene.Parent
 import scalafxml.core.DependenciesByType
-import scala.reflect.runtime.universe.typeOf
 
 import ui.{Component, Utils}
 
