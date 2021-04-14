@@ -18,3 +18,13 @@ I haven't tracked the time I've been using too well but I would approximate that
 
 Last few week have been really busy with other school work so I've only managed to test out some functionalities and plann ahead.
 That's why I haven't pushed any code to the repo.
+
+I got basic board UI rendering working and created all necessary data classes for the program.
+These data classes are still WIP and will change in future.
+
+Got saving and loading of boards working
+
+Next I'll concentrate on the dragging-and-dropping of cards and then I will make it possible to
+add, remove, and modify cards and columns.
+
+I'm a bit late of my schedule but I think I can finish the project on time.
