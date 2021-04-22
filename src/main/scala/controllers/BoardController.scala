@@ -5,7 +5,6 @@ import java.io.File
 import scalafx.scene.layout.HBox
 import scalafx.stage.{FileChooser, Window}
 import scalafx.stage.FileChooser.ExtensionFilter
-import scalafx.stage.Window
 import scalafx.scene.Scene
 import scalafxml.core.macros.sfxml
 
@@ -15,9 +14,9 @@ import data.Board
 @sfxml
 class BoardController(private val columns: HBox, private var board: Board) {
 
-  refresh
+  refresh()
 
-  def refresh: Unit = columns.children = board.columns.map(_.toUIComponent)
+  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent)
 
   def saveBoard: Unit = Utils.save(board)
 
@@ -30,7 +29,7 @@ class BoardController(private val columns: HBox, private var board: Board) {
     val file = fileChooser.showOpenDialog(columns.scene().getWindow())
     if (file != null) {
       board = Utils.load(file.getName())
-      refresh
+      refresh()
     }
   }
 }

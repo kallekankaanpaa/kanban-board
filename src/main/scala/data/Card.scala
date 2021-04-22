@@ -3,12 +3,14 @@ package data
 import scala.reflect.runtime.universe.typeOf
 
 import scalafx.scene.Parent
+import scalafx.scene.input.DataFormat
 import scalafxml.core.DependenciesByType
 
 import ui.{Component, Utils}
 
 /** Factory for [[Card]] instances */
 object Card {
+  val DataFormat = new DataFormat("card")
 
   /** Creates an empty card */
   def apply(): Card = new Card
@@ -126,7 +128,8 @@ class Card extends Serializable with Component {
   /** Card with empty header is considered empty */
   def isEmpty = _header.isEmpty
 
-  def toUIComponent: Parent = Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
+  def toUIComponent: Parent =
+    Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
 
   override def toString(): String = s"${this.header}\n\n${this.description}"
 
