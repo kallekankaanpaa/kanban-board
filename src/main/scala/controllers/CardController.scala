@@ -6,8 +6,10 @@ import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
 import javafx.scene.input.{TransferMode => jfxtm}
+import scalafx.Includes._
 
 import data.{Card, Column}
+import events.RefreshEvent
 import scalafx.beans.property.ObjectProperty
 
 @sfxml
@@ -34,6 +36,7 @@ class CardController(
   def clean(event: DragEvent): Unit = {
     if (event.transferMode == TransferMode.Move && event.dragboard.content.isEmpty) {
       column.cards -= card
+      source.parent().fireEvent(new RefreshEvent())
     }
   }
 }

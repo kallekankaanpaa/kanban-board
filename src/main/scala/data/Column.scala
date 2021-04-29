@@ -17,8 +17,4 @@ class Column(val name: String, var cards: Set[Card]) extends Serializable with C
     .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Column] -> this, typeOf[Board] -> board)))
     .load
     .asInstanceOf[javafx.scene.Parent]
-  def controller = Utils
-    .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Column] -> this)))
-    .getController()
-    .asInstanceOf[ColumnController]
 }

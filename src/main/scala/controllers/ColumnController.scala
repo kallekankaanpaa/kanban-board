@@ -1,17 +1,19 @@
 package controllers
 
-import scalafx.event.Event
+import scalafx.event.{Event}
 import scalafx.scene.input.{DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
+import scalafx.Includes._
 import scalafxml.core.macros.sfxml
 
 import data.{Card, Column, Board}
+import events.RefreshEvent
 import scalafx.scene.input.DataFormat
 
 @sfxml
 class ColumnController(private val cards: VBox, private val column: Column, private val board: Board) {
 
-  cards.children = column.cards.map(_.toUIComponent(board, column))
+  refresh()
 
   def addCard(event: DragEvent): Unit = {
     val db = event.dragboard
@@ -24,6 +26,11 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
     }
 
     event.consume()
+    refresh()
+  }
+
+  def refresh(): Unit = {
+    cards.children = column.cards.map(_.toUIComponent(board, column))
   }
 
   def onOver(event: DragEvent) = {
@@ -37,7 +44,10 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
     event.consume()
   }
 
-  def removeCard(card: Card): Unit = {
-    column.cards -= card
-  }
+  cards.addEventHandler(
+    RefreshEvent.REFRESH,
+    new javafx.event.EventHandler[RefreshEvent] {
+      override def handle(event: RefreshEvent) = refresh()
+    }
+  )
 }
