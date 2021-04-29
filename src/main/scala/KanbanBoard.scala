@@ -15,6 +15,6 @@ object KanbanBoard extends JFXApp {
     title.value = "Kanban board"
     width = 650
     height = 400
-    scene = new Scene(board.toUIComponent)
+    scene = new Scene(board.toUIComponent(board))
   }
 }

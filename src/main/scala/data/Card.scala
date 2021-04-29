@@ -4,8 +4,10 @@ import scala.reflect.runtime.universe.typeOf
 
 import scalafx.scene.Parent
 import scalafx.scene.input.DataFormat
+import scalafx.Includes._
 import scalafxml.core.DependenciesByType
 
+import controllers.CardController
 import ui.{Component, Utils}
 
 /** Factory for [[Card]] instances */
@@ -45,7 +47,7 @@ object Card {
 
 /** A Card that contains details of a task */
 @SerialVersionUID(1L)
-class Card extends Serializable with Component {
+class Card extends Serializable {
 
   val fxmlPath: String = "/fxml/Card.fxml"
 
@@ -128,8 +130,18 @@ class Card extends Serializable with Component {
   /** Card with empty header is considered empty */
   def isEmpty = _header.isEmpty
 
-  def toUIComponent: Parent =
-    Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
+  def toUIComponent(board: Board, column: Column): Parent = Utils
+    .readFXML(
+      fxmlPath,
+      new DependenciesByType(Map(typeOf[Card] -> this, typeOf[Board] -> board, typeOf[Column] -> column))
+    )
+    .load
+    .asInstanceOf[javafx.scene.Parent]
+
+  def controller = Utils
+    .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
+    .getController()
+    .asInstanceOf[CardController]
 
   override def toString(): String = s"${this.header}\n\n${this.description}"
 

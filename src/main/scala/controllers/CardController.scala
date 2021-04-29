@@ -8,13 +8,15 @@ import scalafxml.core.macros.sfxml
 import javafx.scene.input.{TransferMode => jfxtm}
 
 import data.{Card, Column}
+import scalafx.beans.property.ObjectProperty
 
 @sfxml
 class CardController(
     private val source: GridPane,
     private val header: Label,
     private val description: Label,
-    private val card: Card
+    private val card: Card,
+    private val column: Column
 ) {
 
   header.text = card.header
@@ -30,9 +32,8 @@ class CardController(
   }
 
   def clean(event: DragEvent): Unit = {
-    if (event.transferMode == TransferMode.Move) {
-      // remove from current column
-      source.parent()
+    if (event.transferMode == TransferMode.Move && event.dragboard.content.isEmpty) {
+      column.cards -= card
     }
   }
 }

@@ -16,7 +16,7 @@ class BoardController(private val columns: HBox, private var board: Board) {
 
   refresh()
 
-  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent)
+  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent(board))
 
   def saveBoard: Unit = Utils.save(board)
 

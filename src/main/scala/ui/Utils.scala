@@ -2,20 +2,19 @@ package ui
 
 import java.io.{IOException, ObjectOutputStream, ObjectInputStream, FileOutputStream, FileInputStream}
 
-import scalafx.Includes._
 import scalafx.scene.Parent
-import scalafxml.core.{ControllerDependencyResolver, FXMLView, NoDependencyResolver}
+import scalafxml.core.{ControllerDependencyResolver, FXMLView, FXMLLoader, NoDependencyResolver}
 
 import data.Board
 
 object Utils {
-  def readFXML(path: String, controller: ControllerDependencyResolver): Parent = {
+  def readFXML(path: String, controller: ControllerDependencyResolver): FXMLLoader = {
     val component = getClass.getResource(path)
     if (component == null) throw new IOException(s"""Could not read "${path}"""")
-    else FXMLView(component, controller)
+    else new FXMLLoader(component, controller)
   }
 
-  def readFXML(path: String): Parent = readFXML(path, NoDependencyResolver)
+  def readFXML(path: String): FXMLLoader = readFXML(path, NoDependencyResolver)
 
   def save(board: Board): Unit = {
     val stream = new ObjectOutputStream(new FileOutputStream(filename(board.name)))
