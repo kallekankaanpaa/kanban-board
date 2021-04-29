@@ -34,7 +34,8 @@ class CardController(
   }
 
   def clean(event: DragEvent): Unit = {
-    if (event.transferMode == TransferMode.Move && event.dragboard.content.isEmpty) {
+    val parent = source.parent()
+    if (event.transferMode == TransferMode.Move && event.dragboard.content.isEmpty && parent != null) {
       column.cards -= card
       source.parent().fireEvent(new RefreshEvent())
     }

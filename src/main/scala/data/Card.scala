@@ -145,6 +145,16 @@ class Card extends Serializable {
 
   override def toString(): String = s"${this.header}\n\n${this.description}"
 
+  override def equals(obj: Any) = obj match {
+    case c: Card =>
+      header.equals(c.header) &&
+        description.equals(c.description) &&
+        assignee.equals(c.assignee) &&
+        attachments.equals(c.attachments) &&
+        tags.equals(c.tags)
+    case _ => false
+  }
+
   override protected[Card] def clone(): Card =
     Card(
       this._header,

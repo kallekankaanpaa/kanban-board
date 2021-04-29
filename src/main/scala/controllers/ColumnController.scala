@@ -17,12 +17,15 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
 
   def addCard(event: DragEvent): Unit = {
     val db = event.dragboard
-    event.dropCompleted = if (db.hasContent(Card.DataFormat)) {
-      column.cards += db.content(Card.DataFormat).asInstanceOf[Card]
+    if (db.hasContent(Card.DataFormat)) {
+      val card = db.content(Card.DataFormat).asInstanceOf[Card]
+      if (!column.cards.contains(card)) {
+        column.cards += card
+      }
       db.clear()
-      true
+      event.dropCompleted = true
     } else {
-      false
+      event.dropCompleted = false
     }
 
     event.consume()
