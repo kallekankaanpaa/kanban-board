@@ -6,10 +6,7 @@ import data.{Card, Column, Board}
 
 object KanbanBoard extends JFXApp {
 
-  val testCard = Card("With header")
-  val testColumn = new Column("testi column", Set(testCard, Card("Another one")))
-  val anotherColumn = new Column("toka", Set(Card("Asdf")))
-  val board = new Board("testi board", Set(testColumn, anotherColumn))
+  val board = Utils.load("testi_board.kbb")
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Kanban board"
