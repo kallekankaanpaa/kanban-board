@@ -14,4 +14,6 @@ object KanbanBoard extends JFXApp {
     height = 400
     scene = new Scene(board.toUIComponent(board))
   }
+
+  stage.scene().getRoot().requestFocus()
 }

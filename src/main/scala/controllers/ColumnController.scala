@@ -1,8 +1,8 @@
 package controllers
 
 import scalafx.Includes._
-import scalafx.event.Event
-import scalafx.scene.control.Label
+import scalafx.event.{ActionEvent, Event}
+import scalafx.scene.control.TextField
 import scalafx.scene.input.{DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
 import scalafxml.core.macros.sfxml
@@ -11,7 +11,7 @@ import data.{Card, Column, Board}
 import events.RefreshEvent
 
 @sfxml
-class ColumnController(private val cards: VBox, private val column: Column, private val name: Label) {
+class ColumnController(private val cards: VBox, private val column: Column, private val name: TextField) {
 
   name.text = column.name
 
@@ -55,4 +55,9 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
       override def handle(event: RefreshEvent) = refresh()
     }
   )
+
+  def onAction(event: ActionEvent) = {
+    column.name = name.text()
+    cards.requestFocus()
+  }
 }
