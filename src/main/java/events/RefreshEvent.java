@@ -10,5 +10,4 @@ public class RefreshEvent extends Event {
     public RefreshEvent() {
         super(REFRESH);
     }
-
 }

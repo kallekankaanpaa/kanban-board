@@ -16,6 +16,7 @@ import data.{Card, Column}
 import events.RefreshEvent
 import ui.Utils
 import scalafxml.core.DependenciesByType
+import events.CloseModalEvent
 
 @sfxml
 class CardController(
@@ -29,17 +30,23 @@ class CardController(
   header.text = card.header
   description.text = card.description
 
-  def handleOpen(event: Event): Unit = {
-    val stage = new Stage(StageStyle.Unified)
-    stage.scene = new Scene(
-      Utils
-        .readFXML("/fxml/Modal.fxml", new DependenciesByType(Map(typeOf[Card] -> card)))
-        .load
-        .asInstanceOf[javafx.scene.Parent]
-    )
-    stage.initModality(Modality.ApplicationModal)
-    stage.show()
-  }
+  val stage = new Stage(StageStyle.Unified)
+  stage.scene = new Scene(
+    Utils
+      .readFXML("/fxml/Modal.fxml", new DependenciesByType(Map(typeOf[Card] -> card)))
+      .load
+      .asInstanceOf[javafx.scene.Parent]
+  )
+  stage.initModality(Modality.ApplicationModal)
+  stage.addEventHandler(
+    CloseModalEvent.CLOSE_MODAL,
+    (event: CloseModalEvent) => {
+      source.parent().fireEvent(new RefreshEvent())
+      stage.close()
+    }
+  )
+
+  def handleOpen(event: Event): Unit = stage.show()
 
   def move(event: MouseEvent): Unit = {
     val db = source.startDragAndDrop(jfxtm.ANY: _*)
