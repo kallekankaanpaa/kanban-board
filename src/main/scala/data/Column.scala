@@ -18,3 +18,7 @@ class Column(var name: String, var cards: Set[Card]) extends Serializable with C
     .load
     .asInstanceOf[javafx.scene.Parent]
 }
+
+object Column {
+  def Empty: Column = new Column("", Set())
+}

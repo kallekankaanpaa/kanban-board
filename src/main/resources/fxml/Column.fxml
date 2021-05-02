@@ -16,6 +16,6 @@
                </font>
             </TextField>
          </children></AnchorPane>
-      <VBox fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#addCard" onDragEntered="#onEntered" onDragExited="#onExited" onDragOver="#onOver" prefHeight="425.0" prefWidth="389.0" spacing="5.0" styleClass="columns" stylesheets="@../styles/Column.css" />
+      <VBox fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextMenu" onDragDropped="#addCard" onDragEntered="#onEntered" onDragExited="#onExited" onDragOver="#onOver" onMouseClicked="#hideContextMenu" prefHeight="425.0" prefWidth="389.0" spacing="5.0" styleClass="columns" stylesheets="@../styles/Column.css" />
   </items>
 </SplitPane>

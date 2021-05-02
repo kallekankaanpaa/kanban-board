@@ -3,17 +3,25 @@ package controllers
 import scalafx.Includes._
 import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control.TextField
-import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.input.{ContextMenuEvent, DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
 import scalafxml.core.macros.sfxml
 
 import data.{Card, Column, Board}
-import events.RefreshEvent
+import events.{RefreshEvent, RemoveColumnEvent}
+import scalafx.scene.control.ContextMenu
+import scalafx.scene.control.MenuItem
 
 @sfxml
 class ColumnController(private val cards: VBox, private val column: Column, private val name: TextField) {
 
   name.text = column.name
+
+  val contextMenu = new ContextMenu()
+  val delete = new MenuItem("Delete column")
+  delete.onAction = (event: ActionEvent) => cards.parent().fireEvent(new RemoveColumnEvent(column))
+  contextMenu.items += delete
+  contextMenu.hideOnEscape = true
 
   refresh()
 
@@ -60,4 +68,8 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
     column.name = name.text()
     cards.requestFocus()
   }
+
+  def hideContextMenu(event: Event): Unit = contextMenu.hide()
+
+  def contextMenu(event: ContextMenuEvent): Unit = contextMenu.show(cards, event.screenX, event.screenY)
 }

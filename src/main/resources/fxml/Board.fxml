@@ -24,6 +24,7 @@
           <Menu mnemonicParsing="false" styleClass="menu" text="Board">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#newCard" text="New card" />
+                  <MenuItem mnemonicParsing="false" onAction="#addColumn" text="New column" />
             </items>
           </Menu>
         </menus>

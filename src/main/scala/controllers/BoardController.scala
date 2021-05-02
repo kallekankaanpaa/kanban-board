@@ -12,8 +12,8 @@ import scalafxml.core.DependenciesByType
 import java.io.File
 
 import ui.Utils
-import data.{Board, Card}
-import events.CloseModalEvent
+import data.{Board, Card, Column}
+import events.{CloseModalEvent, RemoveColumnEvent}
 
 @sfxml
 class BoardController(private val columns: HBox, private var board: Board) {
@@ -35,6 +35,14 @@ class BoardController(private val columns: HBox, private var board: Board) {
     }
   )
 
+  columns.addEventHandler(
+    RemoveColumnEvent.REMOVE,
+    (event: RemoveColumnEvent) => {
+      board.columns -= event.getColumn()
+      refresh()
+    }
+  )
+
   def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent(board))
 
   def newCard: Unit = {
@@ -46,6 +54,11 @@ class BoardController(private val columns: HBox, private var board: Board) {
         .asInstanceOf[javafx.scene.Parent]
     )
     stage.show()
+  }
+
+  def addColumn: Unit = {
+    board.columns += Column.Empty
+    refresh()
   }
 
   def saveBoard: Unit = Utils.save(board)
