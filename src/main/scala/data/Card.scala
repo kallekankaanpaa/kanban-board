@@ -130,10 +130,10 @@ class Card extends Serializable {
   /** Card with empty header is considered empty */
   def isEmpty = _header.isEmpty
 
-  def toUIComponent(board: Board, column: Column): Parent = Utils
+  def toUIComponent(column: Column): Parent = Utils
     .readFXML(
       fxmlPath,
-      new DependenciesByType(Map(typeOf[Card] -> this, typeOf[Board] -> board, typeOf[Column] -> column))
+      new DependenciesByType(Map(typeOf[Card] -> this, typeOf[Column] -> column))
     )
     .load
     .asInstanceOf[javafx.scene.Parent]

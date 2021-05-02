@@ -2,6 +2,7 @@ package controllers
 
 import scalafx.Includes._
 import scalafx.event.Event
+import scalafx.scene.control.Label
 import scalafx.scene.input.{DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
 import scalafxml.core.macros.sfxml
@@ -10,7 +11,9 @@ import data.{Card, Column, Board}
 import events.RefreshEvent
 
 @sfxml
-class ColumnController(private val cards: VBox, private val column: Column, private val board: Board) {
+class ColumnController(private val cards: VBox, private val column: Column, private val name: Label) {
+
+  name.text = column.name
 
   refresh()
 
@@ -32,7 +35,7 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
   }
 
   def refresh(): Unit = {
-    cards.children = column.cards.map(_.toUIComponent(board, column))
+    cards.children = column.cards.map(_.toUIComponent(column))
   }
 
   def onOver(event: DragEvent) = {
