@@ -1,15 +1,15 @@
 package controllers
 
 import scala.reflect.runtime.universe.typeOf
-import scalafx.Includes._
-import java.io.File
 
+import scalafx.Includes._
 import scalafx.scene.layout.HBox
+import scalafx.scene.Scene
 import scalafx.stage.{FileChooser, Window, Stage, StageStyle, Modality}
 import scalafx.stage.FileChooser.ExtensionFilter
-import scalafx.scene.Scene
 import scalafxml.core.macros.sfxml
 import scalafxml.core.DependenciesByType
+import java.io.File
 
 import ui.Utils
 import data.{Board, Card}

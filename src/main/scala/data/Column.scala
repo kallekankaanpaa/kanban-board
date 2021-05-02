@@ -2,9 +2,9 @@ package data
 
 import scala.reflect.runtime.universe.typeOf
 
+import scalafx.Includes._
 import scalafx.scene.Parent
 import scalafxml.core.DependenciesByType
-import scalafx.Includes._
 
 import controllers.ColumnController
 import ui.{Component, Utils}

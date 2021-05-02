@@ -10,13 +10,12 @@ import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 import scalafx.stage.{Stage, StageStyle, Modality}
 import scalafxml.core.macros.sfxml
+import scalafxml.core.DependenciesByType
 import javafx.scene.input.{TransferMode => jfxtm}
 
 import data.{Card, Column}
-import events.RefreshEvent
+import events.{RefreshEvent, CloseModalEvent}
 import ui.Utils
-import scalafxml.core.DependenciesByType
-import events.CloseModalEvent
 
 @sfxml
 class CardController(

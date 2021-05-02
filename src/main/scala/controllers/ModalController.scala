@@ -1,11 +1,12 @@
 package controllers
 
-import scalafxml.core.macros.sfxml
-import data.Card
 import scalafx.event.Event
 import scalafx.scene.layout.GridPane
-import events.CloseModalEvent
 import scalafx.scene.control.{TextArea, TextField}
+import scalafxml.core.macros.sfxml
+
+import data.Card
+import events.CloseModalEvent
 
 @sfxml
 class ModalController(

@@ -1,14 +1,13 @@
 package controllers
 
-import scalafx.event.{Event}
+import scalafx.Includes._
+import scalafx.event.Event
 import scalafx.scene.input.{DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
-import scalafx.Includes._
 import scalafxml.core.macros.sfxml
 
 import data.{Card, Column, Board}
 import events.RefreshEvent
-import scalafx.scene.input.DataFormat
 
 @sfxml
 class ColumnController(private val cards: VBox, private val column: Column, private val board: Board) {
