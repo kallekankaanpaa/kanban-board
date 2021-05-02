@@ -12,7 +12,8 @@ class ModalController(
     private val modal: GridPane,
     private val card: Card,
     private val header: TextField,
-    private val description: TextArea
+    private val description: TextArea,
+    private val _new: Boolean
 ) {
 
   header.text = card.header
@@ -23,6 +24,6 @@ class ModalController(
   def save(event: Event): Unit = {
     card.header = header.text()
     card.description = description.text()
-    modal.fireEvent(new CloseModalEvent())
+    modal.fireEvent(new CloseModalEvent(_new))
   }
 }

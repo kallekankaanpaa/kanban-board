@@ -155,7 +155,7 @@ class Card extends Serializable {
     case _ => false
   }
 
-  override protected[Card] def clone(): Card =
+  override def clone(): Card =
     Card(
       this._header,
       this._description,
