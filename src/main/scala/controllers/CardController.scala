@@ -1,5 +1,7 @@
 package controllers
 
+import scala.reflect.runtime.universe.typeOf
+
 import scalafx.Includes._
 import scalafx.event.Event
 import scalafx.scene.Scene
@@ -13,6 +15,7 @@ import javafx.scene.input.{TransferMode => jfxtm}
 import data.{Card, Column}
 import events.RefreshEvent
 import ui.Utils
+import scalafxml.core.DependenciesByType
 
 @sfxml
 class CardController(
@@ -27,8 +30,13 @@ class CardController(
   description.text = card.description
 
   def handleOpen(event: Event): Unit = {
-    val stage = new Stage(StageStyle.Undecorated)
-    stage.scene = new Scene(Utils.readFXML("/fxml/Modal.fxml").load.asInstanceOf[javafx.scene.Parent])
+    val stage = new Stage(StageStyle.Unified)
+    stage.scene = new Scene(
+      Utils
+        .readFXML("/fxml/Modal.fxml", new DependenciesByType(Map(typeOf[Card] -> card)))
+        .load
+        .asInstanceOf[javafx.scene.Parent]
+    )
     stage.initModality(Modality.ApplicationModal)
     stage.show()
   }
