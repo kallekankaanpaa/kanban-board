@@ -8,7 +8,7 @@ import scalafx.Includes._
 import scalafxml.core.DependenciesByType
 
 import controllers.CardController
-import ui.{Component, Utils}
+import utils.Utils
 
 /** Factory for [[Card]] instances */
 object Card {
@@ -30,7 +30,6 @@ object Card {
       assignee: Option[String],
       timeUsed: Time,
       timeEstimate: Time,
-      attachments: Set[Attachment],
       tags: Set[Tag]
   ): Card = {
     val card = new Card
@@ -39,7 +38,6 @@ object Card {
     card._assignee = assignee
     card._timeUsed = timeUsed
     card._timeEstimate = timeEstimate
-    card._attachments = attachments
     card._tags = tags
     card
   }
@@ -61,7 +59,6 @@ class Card extends Serializable {
 
   /** Estimated time for the completion of the task in seconds */
   private var _timeEstimate: Time = Time()
-  private var _attachments: Set[Attachment] = Set()
   private var _tags: Set[Tag] = Set()
 
   def header: String = _header.getOrElse("Empty card")
@@ -90,23 +87,6 @@ class Card extends Serializable {
 
   /** Returns `Time` object describing the difference of estimated and used times */
   def timeRemaining: Time = this._timeEstimate - this._timeUsed
-
-  /** Returns a new `Card` with given attachment appended to the `Card` */
-  def +(attachment: Attachment): Card = {
-    val another = this.clone()
-    another._attachments = this._attachments + attachment
-    another
-  }
-
-  /** Returns a new `Card` with given attachment removed to the `Card` */
-  def -(attachment: Attachment): Card = {
-    val another = this.clone()
-    another._attachments = this._attachments + attachment
-    another
-  }
-
-  /** All attachments of this `Card` */
-  def attachments: Set[Attachment] = _attachments
 
   /** Returns a new `Card` with given `Tag` added */
   def +(tag: Tag): Card = {
@@ -141,11 +121,6 @@ class Card extends Serializable {
     .load
     .asInstanceOf[javafx.scene.Parent]
 
-  def controller = Utils
-    .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Card] -> this)))
-    .getController()
-    .asInstanceOf[CardController]
-
   override def toString(): String = s"${this.header}\n\n${this.description}"
 
   override def equals(obj: Any) = obj match {
@@ -153,7 +128,6 @@ class Card extends Serializable {
       header.equals(c.header) &&
         description.equals(c.description) &&
         assignee.equals(c.assignee) &&
-        attachments.equals(c.attachments) &&
         tags.equals(c.tags)
     case _ => false
   }
@@ -165,7 +139,6 @@ class Card extends Serializable {
       this._assignee,
       this._timeUsed,
       this._timeEstimate,
-      this._attachments,
       this._tags
     )
 }

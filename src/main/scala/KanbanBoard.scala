@@ -1,12 +1,12 @@
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
 
-import ui.Utils
+import utils.Utils
 import data.{Card, Column, Board}
 
 object KanbanBoard extends JFXApp {
 
-  val board = Utils.load("testi_board.kbb")
+  val board = new Board("first_board.kbb", Set())
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Kanban board"

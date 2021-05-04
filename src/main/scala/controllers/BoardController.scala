@@ -12,7 +12,7 @@ import scalafxml.core.macros.sfxml
 import scalafxml.core.DependenciesByType
 import java.io.File
 
-import ui.Utils
+import utils.Utils
 import data.{Board, Card, Column, Tag}
 import events.{CloseModalEvent, RemoveColumnEvent}
 
@@ -46,7 +46,12 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
     }
   )
 
-  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent(filters))
+  def refresh(): Unit = {
+    columns.children = board.columns.map(_.toUIComponent(filters))
+    if (columns.getScene() != null) {
+      columns.getScene().getRoot().requestFocus()
+    }
+  }
 
   def newCard: Unit = {
     card = Card()

@@ -19,11 +19,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadBoard" styleClass="menu-item" text="Load" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" styleClass="menu" text="Settings">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" styleClass="menu" text="Board">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#newCard" text="New card" />

@@ -15,7 +15,7 @@ import javafx.scene.input.{TransferMode => jfxtm}
 
 import data.{Card, Column}
 import events.{RefreshEvent, CloseModalEvent}
-import ui.Utils
+import utils.Utils
 
 @sfxml
 class CardController(

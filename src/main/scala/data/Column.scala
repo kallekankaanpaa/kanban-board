@@ -7,7 +7,7 @@ import scalafx.scene.Parent
 import scalafxml.core.DependenciesByType
 
 import controllers.ColumnController
-import ui.{Component, Utils}
+import utils.Utils
 
 @SerialVersionUID(1L)
 class Column(var name: String, var cards: Set[Card]) extends Serializable {
