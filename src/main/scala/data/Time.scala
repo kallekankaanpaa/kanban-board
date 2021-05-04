@@ -13,7 +13,7 @@ object Time {
 
   def apply(input: String): Time = {
     var time = new Time
-    time.seconds = Some(parseTime(input))
+    time.seconds = parseTime(input)
     time
   }
 
@@ -41,7 +41,8 @@ object Time {
     * @return Time given in seconds
     */
   @throws[FormatException]("if provided time string is malformed")
-  private def parseTime(time: String): Long = {
+  private def parseTime(time: String): Option[Long] = {
+    if (time == "No time set") return None
     var seconds = 0
 
     def blockToData(block: String): (Int, Char) = {
@@ -62,7 +63,7 @@ object Time {
         case _   => throw new FormatException(time, "Invalid identifier for time")
       })
     }
-    seconds
+    Some(seconds)
   }
 }
 
@@ -92,6 +93,22 @@ class Time extends Serializable {
     case (Some(a), None)    => Time(a)
     case (None, Some(b))    => Time(0 - b)
     case (None, None)       => Time()
+  }
+
+  def raw(): String = seconds match {
+    case Some(time) =>
+      var blocks = Buffer[(Long, String)]()
+      blocks += time / Time.Week -> "w"
+      blocks += time % Time.Week / Time.Day -> "d"
+      blocks += time % Time.Week % Time.Day / Time.Hour -> "h"
+      blocks += time % Time.Week % Time.Day % Time.Hour / Time.Minute -> "m"
+
+      blocks
+        .filter(_._1 != 0)
+        .map(data => s"${data._1}${data._2}")
+        .mkString(" ")
+    case None =>
+      "No time set"
   }
 
   /** Turns the Long time to human readable time string */

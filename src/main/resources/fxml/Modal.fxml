@@ -17,5 +17,9 @@
       <TextArea fx:id="description" layoutX="14.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" />
       <TextField fx:id="assignee" layoutX="300.0" layoutY="31.0" />
       <Label layoutX="300.0" layoutY="14.0" text="Assignee" />
+      <Label layoutX="300.0" layoutY="56.0" text="Time estimate" />
+      <TextField fx:id="estimate" layoutX="301.0" layoutY="73.0" />
+      <Label layoutX="301.0" layoutY="98.0" text="Time used" />
+      <TextField fx:id="used" layoutX="300.0" layoutY="115.0" />
    </children>
 </AnchorPane>
