@@ -15,5 +15,6 @@
       <Label fx:id="description" alignment="TOP_LEFT" layoutX="5.0" layoutY="24.0" prefHeight="80.0" prefWidth="200.0" wrapText="true" />
       <Label fx:id="assignee" layoutX="204.0" layoutY="5.0" prefWidth="100.0" />
       <Label fx:id="timeLeft" layoutX="205.0" layoutY="21.0" prefWidth="100.0" />
+      <Label fx:id="tags" alignment="TOP_LEFT" layoutX="204.0" layoutY="38.0" prefHeight="65.0" prefWidth="100.0" wrapText="true" />
    </children>
 </AnchorPane>

@@ -5,7 +5,7 @@ import scalafx.scene.layout.AnchorPane
 import scalafx.scene.control.{TextArea, TextField}
 import scalafxml.core.macros.sfxml
 
-import data.{Card, Time}
+import data.{Card, Time, Tag}
 import events.CloseModalEvent
 
 @sfxml
@@ -17,6 +17,7 @@ class ModalController(
     private val assignee: TextField,
     private val estimate: TextField,
     private val used: TextField,
+    private val tags: TextField,
     private val _new: Boolean
 ) {
 
@@ -25,6 +26,7 @@ class ModalController(
   assignee.text = card.assignee
   estimate.text = card.timeEstimate.raw
   used.text = card.timeUsed.raw
+  tags.text = card.tags.map(_.toString()).mkString(", ")
 
   def cancel(event: Event): Unit = modal.fireEvent(new CloseModalEvent())
 
@@ -34,6 +36,7 @@ class ModalController(
     card.assignee = assignee.text()
     card.timeEstimate = Time(estimate.text())
     card.timeUsed = Time(used.text())
+    card.tags = tags.text().split(',').map(s => Tag(s.trim)).toSet
     modal.fireEvent(new CloseModalEvent(_new))
   }
 }

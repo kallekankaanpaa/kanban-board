@@ -125,6 +125,8 @@ class Card extends Serializable {
   /** Returns all tags of the card */
   def tags: Set[Tag] = _tags
 
+  def tags_=(tags: Set[Tag]): Unit = _tags = tags
+
   /** Returns boolean indicating whether card has been tagged with the provided tag */
   def hasTag(tag: Tag): Boolean = _tags.contains(tag)
 

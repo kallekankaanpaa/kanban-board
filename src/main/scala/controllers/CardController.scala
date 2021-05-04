@@ -24,6 +24,7 @@ class CardController(
     private val description: Label,
     private val assignee: Label,
     private val timeLeft: Label,
+    private val tags: Label,
     private val card: Card,
     private val column: Column
 ) {
@@ -32,6 +33,7 @@ class CardController(
   description.text = card.description
   assignee.text = card.assignee
   timeLeft.text = card.timeRemaining.toString()
+  tags.text = card.tags.mkString(", ")
 
   val stage = new Stage(StageStyle.Unified)
   stage.scene = new Scene(

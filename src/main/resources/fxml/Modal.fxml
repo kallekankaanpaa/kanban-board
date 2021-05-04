@@ -21,5 +21,7 @@
       <TextField fx:id="estimate" layoutX="301.0" layoutY="73.0" />
       <Label layoutX="301.0" layoutY="98.0" text="Time used" />
       <TextField fx:id="used" layoutX="300.0" layoutY="115.0" />
+      <Label layoutX="300.0" layoutY="140.0" prefHeight="17.0" prefWidth="41.0" text="Tags" />
+      <TextField fx:id="tags" layoutX="300.0" layoutY="157.0" />
    </children>
 </AnchorPane>
