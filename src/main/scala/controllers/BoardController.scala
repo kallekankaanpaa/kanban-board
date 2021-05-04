@@ -61,6 +61,21 @@ class BoardController(private val columns: HBox, private var board: Board) {
     refresh()
   }
 
+  def newBoard: Unit = {
+    val fileChooser = new FileChooser {
+      title = "New board"
+      initialDirectory = new File(".")
+    }
+
+    fileChooser.getExtensionFilters().add(new ExtensionFilter("Kanban Boards", "*.kbb"))
+    val file = fileChooser.showSaveDialog(columns.scene().getWindow())
+    if (file != null) {
+      val name: String = file.getName().replaceAll("(.\\w+)$", "")
+      board = new Board(name, Set())
+      refresh()
+    }
+  }
+
   def saveBoard: Unit = Utils.save(board)
 
   def loadBoard: Unit = {
