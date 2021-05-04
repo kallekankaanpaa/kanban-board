@@ -17,7 +17,7 @@ object Utils {
   def readFXML(path: String): FXMLLoader = readFXML(path, NoDependencyResolver)
 
   def save(board: Board): Unit = {
-    val stream = new ObjectOutputStream(new FileOutputStream(filename(board.name)))
+    val stream = new ObjectOutputStream(new FileOutputStream(board.path))
     stream.writeObject(board)
     stream.close
   }
@@ -28,15 +28,4 @@ object Utils {
     stream.close
     data.asInstanceOf[Board]
   }
-
-  /** Generates filename from parameter.
-    *
-    * Changes all characters to lowercase first since some filesystems are case-sensitive.
-    * Replaces all whitespace characters with underscores and append .kbb (KanBan Board)
-    * suffix to the filename
-    *
-    * @param name Original name to turn into filename
-    * @return Filesystem friendly name for the file
-    */
-  private def filename(name: String): String = name.toLowerCase.replaceAll("\\s", "_") + ".kbb"
 }

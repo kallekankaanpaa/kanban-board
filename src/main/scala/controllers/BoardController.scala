@@ -73,8 +73,8 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
     fileChooser.getExtensionFilters().add(new ExtensionFilter("Kanban Boards", "*.kbb"))
     val file = fileChooser.showSaveDialog(columns.scene().getWindow())
     if (file != null) {
-      val name: String = file.getName().replaceAll("(.\\w+)$", "")
-      board = new Board(name, Set())
+      val path = file.getPath()
+      board = new Board(path, Set())
       refresh()
     }
   }
