@@ -29,6 +29,7 @@ class CardController(
 
   header.text = card.header
   description.text = card.description
+  assignee.text = card.assignee
 
   val stage = new Stage(StageStyle.Unified)
   stage.scene = new Scene(

@@ -70,8 +70,9 @@ class Card extends Serializable {
   def description: String = _description.getOrElse("No description")
   def description_=(description: String): Unit = this._description = Some(description)
 
-  def assignee: String = _assignee.getOrElse("This card hasn't been assigned yet.")
-  def assignee_=(assignee: String): Unit = this._assignee = Some(assignee)
+  def assignee: String = _assignee.getOrElse("Not assigned")
+  def assignee_=(assignee: String): Unit = this._assignee =
+    if (Seq("Not assigned", "").contains(assignee)) None else Some(assignee)
 
   def timeEstimate_+(time: Time): Time = this._timeEstimate + time
 
