@@ -10,8 +10,8 @@ object KanbanBoard extends JFXApp {
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Kanban board"
-    width = 650
-    height = 400
+    width = 1100
+    height = 600
     scene = new Scene(board.toUIComponent(board))
   }
 

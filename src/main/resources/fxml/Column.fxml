@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.05" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="100.0" minWidth="-Infinity" orientation="VERTICAL" prefHeight="1000.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ColumnController">
+<SplitPane dividerPositions="0.05" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ColumnController">
   <items>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0">
          <children>
@@ -15,7 +17,13 @@
                   <Font size="24.0" />
                </font>
             </TextField>
-         </children></AnchorPane>
-      <VBox fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextMenu" onDragDropped="#addCard" onDragEntered="#onEntered" onDragExited="#onExited" onDragOver="#onOver" onMouseClicked="#hideContextMenu" prefHeight="425.0" prefWidth="389.0" spacing="5.0" styleClass="columns" stylesheets="@../styles/Column.css" />
+         </children>
+    </AnchorPane>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" vbarPolicy="NEVER">
+      <VBox fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onContextMenuRequested="#contextMenu" onDragDropped="#addCard" onDragEntered="#onEntered" onDragExited="#onExited" onDragOver="#onOver" onMouseClicked="#hideContextMenu" prefHeight="1500.0" spacing="5.0" styleClass="columns" stylesheets="@../styles/Column.css">
+            <padding>
+               <Insets left="3.0" right="3.0" />
+            </padding></VBox>
+    </ScrollPane>
   </items>
 </SplitPane>

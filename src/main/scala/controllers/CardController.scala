@@ -7,7 +7,7 @@ import scalafx.event.Event
 import scalafx.scene.Scene
 import scalafx.scene.input.{MouseEvent, DragEvent, ClipboardContent, TransferMode}
 import scalafx.scene.control.Label
-import scalafx.scene.layout.GridPane
+import scalafx.scene.layout.AnchorPane
 import scalafx.stage.{Stage, StageStyle, Modality}
 import scalafxml.core.macros.sfxml
 import scalafxml.core.DependenciesByType
@@ -19,9 +19,10 @@ import ui.Utils
 
 @sfxml
 class CardController(
-    private val source: GridPane,
+    private val source: AnchorPane,
     private val header: Label,
     private val description: Label,
+    private val assignee: Label,
     private val card: Card,
     private val column: Column
 ) {
