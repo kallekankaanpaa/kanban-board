@@ -7,13 +7,18 @@ import scalafx.scene.input.{ContextMenuEvent, DragEvent, TransferMode}
 import scalafx.scene.layout.VBox
 import scalafxml.core.macros.sfxml
 
-import data.{Card, Column, Board}
+import data.{Card, Column, Board, Tag}
 import events.{RefreshEvent, RemoveColumnEvent}
 import scalafx.scene.control.ContextMenu
 import scalafx.scene.control.MenuItem
 
 @sfxml
-class ColumnController(private val cards: VBox, private val column: Column, private val name: TextField) {
+class ColumnController(
+    private val cards: VBox,
+    private val column: Column,
+    private val filters: Set[Tag],
+    private val name: TextField
+) {
 
   name.text = column.name
 
@@ -42,9 +47,9 @@ class ColumnController(private val cards: VBox, private val column: Column, priv
     refresh()
   }
 
-  def refresh(): Unit = {
-    cards.children = column.cards.map(_.toUIComponent(column))
-  }
+  def refresh(): Unit = cards.children = column.cards.filter(predicate).map(_.toUIComponent(column))
+
+  private def predicate: Card => Boolean = c => if (filters.isEmpty) true else c.tags.exists(filters.contains(_))
 
   def onOver(event: DragEvent) = {
     event.acceptTransferModes(TransferMode.Move)

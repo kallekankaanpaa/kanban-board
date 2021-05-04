@@ -14,10 +14,6 @@ class Board(var name: String, var columns: Set[Column]) extends Serializable wit
   val fxmlPath: String = "/fxml/Board.fxml"
   def toUIComponent(board: Board): Parent =
     Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Board] -> this))).load.asInstanceOf[javafx.scene.Parent]
-  def controller = {
-    val tmp = Utils
-      .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Board] -> this)))
-      .getController()
-      .asInstanceOf[BoardController]
-  }
+
+  def allTags: Seq[Tag] = columns.flatMap(_.cards).flatMap(_.tags).toSeq.sortBy(_.identifier)
 }

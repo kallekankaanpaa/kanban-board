@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -30,6 +31,15 @@
                   <MenuItem mnemonicParsing="false" onAction="#newBoard" text="New Board" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Filter cards">
+              <items>
+                <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <TextField fx:id="filter" onAction="#filterAction" promptText="Filter by" />
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

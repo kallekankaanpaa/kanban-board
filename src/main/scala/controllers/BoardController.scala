@@ -3,8 +3,9 @@ package controllers
 import scala.reflect.runtime.universe.typeOf
 
 import scalafx.Includes._
-import scalafx.scene.layout.HBox
 import scalafx.scene.Scene
+import scalafx.scene.layout.HBox
+import scalafx.scene.control.TextField
 import scalafx.stage.{FileChooser, Window, Stage, StageStyle, Modality}
 import scalafx.stage.FileChooser.ExtensionFilter
 import scalafxml.core.macros.sfxml
@@ -12,11 +13,13 @@ import scalafxml.core.DependenciesByType
 import java.io.File
 
 import ui.Utils
-import data.{Board, Card, Column}
+import data.{Board, Card, Column, Tag}
 import events.{CloseModalEvent, RemoveColumnEvent}
 
 @sfxml
-class BoardController(private val columns: HBox, private var board: Board) {
+class BoardController(private val columns: HBox, private val filter: TextField, private var board: Board) {
+
+  var filters = Set[Tag]()
 
   refresh()
 
@@ -43,7 +46,7 @@ class BoardController(private val columns: HBox, private var board: Board) {
     }
   )
 
-  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent(board))
+  def refresh(): Unit = columns.children = board.columns.map(_.toUIComponent(filters))
 
   def newCard: Unit = {
     card = Card()
@@ -89,5 +92,10 @@ class BoardController(private val columns: HBox, private var board: Board) {
       board = Utils.load(file.getName())
       refresh()
     }
+  }
+
+  def filterAction: Unit = {
+    filters = filter.text().split(',').map(_.trim).filter(_.nonEmpty).map(t => Tag(t)).toSet
+    refresh()
   }
 }

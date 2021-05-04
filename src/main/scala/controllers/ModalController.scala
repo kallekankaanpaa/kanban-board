@@ -36,7 +36,7 @@ class ModalController(
     card.assignee = assignee.text()
     card.timeEstimate = Time(estimate.text())
     card.timeUsed = Time(used.text())
-    card.tags = tags.text().split(',').map(s => Tag(s.trim)).toSet
+    card.tags = tags.text().split(',').map(_.trim).filter(_.nonEmpty).map(t => Tag(t)).toSet
     modal.fireEvent(new CloseModalEvent(_new))
   }
 }

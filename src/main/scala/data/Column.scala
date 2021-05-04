@@ -10,11 +10,11 @@ import controllers.ColumnController
 import ui.{Component, Utils}
 
 @SerialVersionUID(1L)
-class Column(var name: String, var cards: Set[Card]) extends Serializable with Component {
+class Column(var name: String, var cards: Set[Card]) extends Serializable {
   val fxmlPath: String = "/fxml/Column.fxml"
 
-  def toUIComponent(board: Board): Parent = Utils
-    .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Column] -> this, typeOf[Board] -> board)))
+  def toUIComponent(filters: Set[Tag]): Parent = Utils
+    .readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Column] -> this, typeOf[Set[Tag]] -> filters)))
     .load
     .asInstanceOf[javafx.scene.Parent]
 }
