@@ -41,7 +41,7 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
   columns.addEventHandler(
     RemoveColumnEvent.REMOVE,
     (event: RemoveColumnEvent) => {
-      board.columns -= event.getColumn()
+      board.columns = board.columns.filter(_ != event.getColumn())
       refresh()
     }
   )
@@ -65,7 +65,7 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
   }
 
   def addColumn: Unit = {
-    board.columns += Column.Empty
+    board.columns = board.columns :+ Column.Empty
     refresh()
   }
 
@@ -79,7 +79,8 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
     val file = fileChooser.showSaveDialog(columns.scene().getWindow())
     if (file != null) {
       val path = file.getPath()
-      board = new Board(path, Set())
+      board = new Board(path, Seq())
+      saveBoard
       refresh()
     }
   }
@@ -94,7 +95,7 @@ class BoardController(private val columns: HBox, private val filter: TextField, 
     fileChooser.getExtensionFilters().add(new ExtensionFilter("Kanban Boards", "*.kbb"))
     val file = fileChooser.showOpenDialog(columns.scene().getWindow())
     if (file != null) {
-      board = Utils.load(file.getName())
+      board = Utils.load(file.getPath())
       refresh()
     }
   }

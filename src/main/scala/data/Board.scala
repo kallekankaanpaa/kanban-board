@@ -9,8 +9,8 @@ import scalafxml.core.DependenciesByType
 import controllers.BoardController
 import utils.Utils
 
-@SerialVersionUID(1L)
-class Board(var path: String, var columns: Set[Column]) extends Serializable {
+@SerialVersionUID(3L)
+class Board(var path: String, var columns: Seq[Column]) extends Serializable {
   val fxmlPath: String = "/fxml/Board.fxml"
   def toUIComponent(board: Board): Parent =
     Utils.readFXML(fxmlPath, new DependenciesByType(Map(typeOf[Board] -> this))).load.asInstanceOf[javafx.scene.Parent]

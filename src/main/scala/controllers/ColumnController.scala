@@ -34,7 +34,7 @@ class ColumnController(
     val db = event.dragboard
     if (db.hasContent(Card.DataFormat)) {
       val card = db.content(Card.DataFormat).asInstanceOf[Card]
-      if (!column.cards.contains(card)) {
+      if (!column.cards.exists(c => card.header == c.header && card.description == c.description)) {
         column.cards += card
       }
       db.clear()

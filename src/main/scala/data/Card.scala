@@ -69,7 +69,7 @@ class Card extends Serializable {
 
   def assignee: String = _assignee.getOrElse("Not assigned")
   def assignee_=(assignee: String): Unit = this._assignee =
-    if (Seq("Not assigned", "").contains(assignee)) Some(assignee) else None
+    if (Seq("Not assigned", "").contains(assignee)) None else Some(assignee)
 
   def timeEstimate_+(time: Time): Time = this._timeEstimate + time
 
@@ -125,10 +125,7 @@ class Card extends Serializable {
 
   override def equals(obj: Any) = obj match {
     case c: Card =>
-      header.equals(c.header) &&
-        description.equals(c.description) &&
-        assignee.equals(c.assignee) &&
-        tags.equals(c.tags)
+      header == c.header && description == c.description
     case _ => false
   }
 

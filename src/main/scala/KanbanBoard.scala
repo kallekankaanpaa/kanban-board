@@ -6,7 +6,7 @@ import data.{Card, Column, Board}
 
 object KanbanBoard extends JFXApp {
 
-  val board = new Board("first_board.kbb", Set())
+  val board = new Board("first_board.kbb", Seq())
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Kanban board"
